@@ -143,6 +143,6 @@ app.get("/successfultransaction",(req,res)=> {
     res.render("success");
 });
 
-app.listen(process.env.PORT,()=> {
+app.listen(process.env.PORT || 80,()=> {
     console.log("The server is listening!!");
 });
