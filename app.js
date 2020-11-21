@@ -7,7 +7,7 @@ let app = express();
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 
-const port = 80;
+// const port = 80;
 
 mongoose.connect("mongodb://localhost/bbsdb",{useNewUrlParser: true,useUnifiedTopology:true});
 
@@ -143,6 +143,6 @@ app.get("/successfultransaction",(req,res)=> {
     res.render("success");
 });
 
-app.listen(port,()=> {
+app.listen(process.env.PORT,()=> {
     console.log("The server is listening!!");
 });
