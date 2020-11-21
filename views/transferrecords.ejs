@@ -1,0 +1,40 @@
+<%- include("partials/header") %>
+
+<style>
+    .icons {
+        margin: auto 0.8rem;
+        cursor: pointer;
+    }
+    table {
+        border: 2px solid black;
+    }
+</style>
+
+<div style="margin-bottom: 2.5rem;">
+    <span class="icons">
+        <i class="fa fa-arrow-left" id="back" aria-hidden="true" style="font-size: 1.5rem; margin-top: 1%;" onclick="window.location.href='/'" title="Go back"></i>
+    </span>
+    
+    <span class="icons">
+        <i class="fa fa-users fa-10x" id="back" aria-hidden="true" style="font-size: 1.5rem; margin-top: 1%;" onclick="window.location.href='/viewall'" title="View All Customers"></i>
+    </span>
+</div>
+
+<table>
+    <tr>
+        <th>S.No.</th>
+        <th>Payer</th>
+        <th>Payee</th>
+        <th>Amount transferred</th>
+        <%for(var i=0;i<transfers.length;i++) {%>
+            <tr>
+                <td><%=(i+1)%></td>
+                <td><%=transfers[i].transferredby%></td>
+                <td><%=transfers[i].transferredto%></td>
+                <td><%=transfers[i].amount%></td>
+            </tr>
+        <%}%>
+    </tr>
+</table>
+
+<%- include("partials/footer") %>

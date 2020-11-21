@@ -1,0 +1,63 @@
+<%- include("partials/header") %>
+
+
+<style>
+    .icons {
+        margin: auto 0.8rem;
+        cursor: pointer;
+    }
+    #eye {
+        cursor: pointer;
+    }
+    #eye:hover {
+        color: #1A73E8;
+        opacity: 0.6;
+    }
+</style>
+
+<div>
+    <span class="icons">
+        <i class="fa fa-arrow-left" id="back" aria-hidden="true" style="font-size: 1.5rem; margin-top: 1%;" onclick="window.location.href='/'" title="Go back"></i>
+    </span>
+    
+     <span class="icons">
+        <i class="fa fa-exchange" aria-hidden="true" id="back" style="font-size: 1.5rem; margin-top: 1%;" onclick="window.location.href='/transfers'" title="View Transfer History"></i>
+     </span>
+</div>
+
+<div class="container">
+    <table style="border: 2px solid black;">
+        <tr>
+            <th>
+                <strong>Customer Name</strong>
+            </th>
+            <th>
+                <strong>Email ID</strong>
+            </th>
+            <th>
+                <strong>Current Balance</strong>
+            </th>
+            <th></th>
+        </tr>
+        <%var i;%> 
+        <%for(i=0;i<customers.length;i++) {%>
+            <tr>
+                <td>
+                    <%=customers[i].name%>
+                </td>
+                <td>
+                    <%=customers[i].email%>
+                </td>
+                <td>
+                    <%=customers[i].currentBalance%>
+                </td>
+                <td>
+                    <!-- <button onclick="window.location.href='/viewall/<%=customers[i]._id%>'">View</button> -->
+                    <i class="fas fa-eye" id="eye" style="font-size: 1.7rem;" onclick="window.location.href='/viewall/<%=customers[i]._id%>'"></i>
+                </td>
+            </tr>
+        <%}%>
+    </table>
+</div>
+
+<%- include("partials/footer") %>

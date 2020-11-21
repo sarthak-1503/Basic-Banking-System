@@ -1,0 +1,62 @@
+<%- include("partials/header") %>
+
+ <span class="icons">
+    <i class="fa fa-arrow-left" id="back" aria-hidden="true" style="font-size: 1.5rem; margin-top: 1%;" onclick="window.location.href='/viewall'" title="Go back"></i>
+</span>
+
+<style>
+    #record {
+        margin-top: 2rem;
+        margin-bottom: 3rem;
+    }
+    #transferbutton {
+        outline: none;
+        border: 0;
+        border-radius: 0.4rem;
+    }
+    #transferbutton:hover {
+        /* text-decoration-color: #1A73E8; */
+        color: white;
+    }
+    th {
+            padding: 1rem 5rem;
+            border-right: 2px solid rgb(117, 113, 113);
+            border-bottom:0.5px solid rgb(228, 228, 228) ;
+            padding-right: 2.5rem;
+            padding-left: 2.5rem;
+        }
+        td {
+            padding-right: 10rem;
+            padding-left: 10rem;
+        }
+</style>
+
+<div style="text-align: center; margin: 3rem; ">
+    <h2>
+        Customer Details
+    </h2>
+</div>
+
+<div id="record">
+    <table>
+        <tr>
+            <th>Name</th>
+            <td><%=record.name%></td>
+        </tr>
+        <tr>
+            <th>Email ID</th>
+            <td><%=record.email%></td>
+        </tr>
+        <tr>
+            <th>Current Balance</th>
+            <td>Rs. <%=record.currentBalance%></td>
+        </tr>
+    </table>
+    
+</div>
+
+<div style="text-align: center; margin-top: 6rem;">
+    <button id="transferbutton" class="btn btn-lg btn-primary"  onclick="window.location.href='/viewall/<%=record._id%>/transferto'">Transfer Money</button>
+</div>
+
+<%- include("partials/footer") %>

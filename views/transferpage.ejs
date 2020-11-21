@@ -1,0 +1,91 @@
+<%- include("partials/header") %>
+
+<style>
+    td {
+        text-align: center;
+        padding: 0.8rem;
+        margin-bottom: 0.5rem;
+    }
+    #activebutton {
+        cursor: pointer;
+    }
+    #disabled {
+        opacity: 0.2;
+    }
+    #amount {
+        text-align: center;
+        margin-top: 2.5rem;
+    }
+    #transbutton {
+        margin-left: 0.5rem;
+        
+    }
+    #transfer:hover {
+            cursor: pointer;
+            font-size: 10rem;
+            color: #1A73E8;
+            opacity:0.6;
+        }
+        td{
+            padding-bottom: 0.7rem; 
+            padding-top: 0.7rem;
+        }
+</style>
+<span class="icons">
+    <i class="fa fa-arrow-left" id="back" aria-hidden="true" style="font-size: 1.5rem; margin-top: 1%;" onclick="window.location.href='/viewall/<%=record._id%>'" title="Go back"></i>
+</span>
+
+<div>
+    <div>
+        <table>
+            <tr>
+               <th>Name</th>
+               <th>Email ID</th>
+               <th>Current Balance</th> 
+               <th></th>
+            </tr>
+            <% for(var i=0;i<10;i++) {%>
+        
+                <%let cid = JSON.stringify(customers[i]._id) %>
+                <%let rid = JSON.stringify(record._id) %>
+                
+                <tr>
+                    <%if(cid.localeCompare(rid)) {%>
+        
+                        <td><%=customers[i].name%></td>
+                        <td><%=customers[i].email%></td>
+                        <td><%=customers[i].currentBalance%></td>
+                        <td>
+                            <%if(JSON.stringify(transfercust._id).localeCompare(JSON.stringify(customers[i]._id))) {%>
+                                <i class="fas fa-exchange-alt" id="transfer" onclick="window.location.href='/viewall/<%=record._id%>/transferto/<%=customers[i]._id%>'" style="font-size: 2rem;"></i>
+                            <%} else {%> 
+                                <i class="fas fa-exchange-alt" id="disabled" style="font-size: 2rem;" ></i>
+                                
+                            <%}%>   
+                        </td>
+                    <%}%>
+                </tr>
+            <%}%>
+        </table>
+        
+    </div>
+
+    
+    
+    <div id="amount">
+        <div style="margin: 0.5rem">
+            <%if(s==1) {%>
+                <div style="text-align: center; margin-top: 1rem;">
+                    <strong><p style="color: rgb(230, 64, 64);">Amount insufficient!! <span style="color: green;">Enter amount <= Rs. <%=record.currentBalance%></span> </p></strong>
+                    <%s=0;%>
+                </div>
+                <%}%>
+        </div>
+        <form action="/viewall/<%=record._id%>/transferto/<%=transfercust._id%>" method="POST">
+            <input type="number" name="amount" placeholder="Amount" style="width: 15%; height: 30%;" required>
+            <button class="btn btn-sm btn-primary" id="transbutton" style="font-size: 0.9rem;">Transfer!</button>
+        </form>
+    </div>
+</div>
+
+<%- include("partials/footer") %>

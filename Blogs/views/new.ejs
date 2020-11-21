@@ -1,0 +1,34 @@
+<%- include("partials/header.ejs") %>
+
+<h2>CREATE A NEW POST!!</h2>
+
+<form action="/cartoon" method="POST">
+    <div>
+        <span class="name">Name</span>
+        <input class="" type="text" class="name" name="name" placeholder="Name">
+    </div>
+    
+    <div>
+        <span class="title">Title</span>
+        <input type="text" class="title" name="title" placeholder="Title">
+    </div>
+    
+    <div>
+        <span class="image">Image</span>
+        <input type="text" class="image" name="image" placeholder="Image">
+    </div>
+    
+    <div>
+        <span class="desc">Description</span>
+        <input type="text" class="desc" name="desc" placeholder="Description">
+    </div>
+    
+    <div>
+        <span class="postedon">Posted On</span>
+        <input type="text" class="postedon" name="postedon" placeholder="Posted On">
+    </div>
+
+    <button>Submit!!</button>
+</form>
+
+<%- include("partials/footer.ejs") %>
