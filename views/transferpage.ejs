@@ -57,7 +57,7 @@
                         <td><%=customers[i].currentBalance%></td>
                         <td>
                             <%if(JSON.stringify(transfercust._id).localeCompare(JSON.stringify(customers[i]._id))) {%>
-                                <i class="fas fa-exchange-alt" id="transfer" onclick="window.location.href='/viewall/<%=record._id%>/transferto/<%=customers[i]._id%>'" style="font-size: 2rem;"></i>
+                                <i class="fas fa-exchange-alt" id="transfer" title="transfer" onclick="window.location.href='/viewall/<%=record._id%>/transferto/<%=customers[i]._id%>'" style="font-size: 2rem;"></i>
                             <%} else {%> 
                                 <i class="fas fa-exchange-alt" id="disabled" style="font-size: 2rem;" ></i>
                                 
