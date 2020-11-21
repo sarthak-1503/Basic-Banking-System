@@ -4,7 +4,7 @@
 <span class="icons">
     <i class="fa fa-arrow-left" id="back" aria-hidden="true" style="font-size: 1.5rem; margin-top: 1%;" onclick="window.location.href='/viewall/<%=record._id%>'" title="Go back"></i>
 </span>
-
+<!-- <button onclick="window.location.href='/viewall/<%=record._id%>'">Back</button> -->
 
 <style>
     td {
@@ -23,7 +23,7 @@
         <tr>
            <th>Name</th>
            <th>Email ID</th>
-           <th>Current Balance (Rs.)</th> 
+           <th>Current Balance</th> 
            <th></th>
         </tr>
         <% for(var i=0;i<10;i++) {%>
@@ -37,7 +37,7 @@
                     <td><%=customers[i].email%></td>
                     <td><%=customers[i].currentBalance%></td>
                     <td>
-                        <i class="fas fa-exchange-alt" title="transfer" onclick="window.location.href='/viewall/<%=record._id%>/transferto/<%=customers[i]._id%>'" id="transfer" style="font-size: 2rem;"></i>
+                        <i class="fas fa-exchange-alt" onclick="window.location.href='/viewall/<%=record._id%>/transferto/<%=customers[i]._id%>'" id="transfer" style="font-size: 2rem;"></i>
                     </td>
                     
                 </tr>

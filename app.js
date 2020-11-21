@@ -26,6 +26,20 @@ let transferSchema = new mongoose.Schema({
 let Customers = mongoose.model("Customers",customerSchema);
 let Transfers = mongoose.model("Transfers",transferSchema);
 
+Customers.deleteMany({},(err,record)=> {
+    if(err)
+        console.log(err);
+    else    
+        console.log(record);
+})
+
+Transfers.deleteMany({},(err,record)=> {
+    if(err)
+        console.log(err);
+    else    
+        console.log(record);
+})
+
 app.get("/",(req,res)=> {
     res.render("home");
 });
