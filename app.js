@@ -45,8 +45,15 @@ app.get("/",async(req,res)=> {
 });
 
 app.get("/viewall",async(req,res)=> {
-    let record = await Customers.find({});
-    res.render("viewall",{customers:record});
+    let record;
+    try {
+        record = await Customers.find({});
+        res.render("viewall",{customers:record});
+    }
+    catch (err) {
+        console.error(error);
+        process.exit(1);
+    }
 });
 
 app.get("/viewall/:customerid",async(req,res)=> {
@@ -135,8 +142,14 @@ app.post("/viewall/:customerid/transferto/:transfercid",async(req,res)=> {
 });
 
 app.get("/transfers",async(req,res)=> {
-    let transfers = await Transfers.find({});
-    res.render("transferrecords",{transfers:transfers});
+    try {
+        let transfers = await Transfers.find({});
+        res.render("transferrecords",{transfers:transfers});
+    }
+    catch(error) {
+        console.error(error);
+        process.exit(1);
+    }
 });
 
 app.get("/successfultransaction",(req,res)=> {
