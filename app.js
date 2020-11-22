@@ -57,36 +57,58 @@ app.get("/viewall",async(req,res)=> {
 });
 
 app.get("/viewall/:customerid",async(req,res)=> {
-    let cid = req.params.customerid;
+    try {
+        let cid = req.params.customerid;
 
     let record = await Customers.findOne({_id:cid});
     let allcustomers = await Customers.find({});
 
     res.render("customerpage",{record:record,customers:allcustomers});
+    }
+    catch (err) {
+        console.error(error);
+        process.exit(1);
+    }
 });
 
 app.get("/viewall/:customerid/transferto",async(req,res)=> {
-    let cid = req.params.customerid;
+    
+    try {
+        let cid = req.params.customerid;
     let record = await Customers.findOne({_id:cid});
     let customers = await Customers.find({});
 
     res.render("transfertocustomers",{record:record,customers:customers});
+    }
+    catch (err) {
+        console.error(error);
+        process.exit(1);
+    }
 });
 let s = 0;
 app.get("/viewall/:customerid/transferto/:transfercid",async(req,res)=> {
-    let cid = req.params.customerid;
+    
+    try {
+        let cid = req.params.customerid;
     let transfercid = req.params.transfercid;
     let record = await Customers.findOne({_id:cid});
     let transfercust = await Customers.findOne({_id:transfercid});
     let customers = await Customers.find({});
 
     res.render("transferpage",{transfercust:transfercust,record:record,customers:customers,s:s});
+    }
+    catch (err) {
+        console.error(error);
+        process.exit(1);
+    }
+    
 });
 
 
 
 app.post("/viewall/:customerid/transferto/:transfercid",async(req,res)=> {
-    let amount = req.body.amount;
+    try {
+        let amount = req.body.amount;
     let transfercid = req.params.transfercid;
     let cid = req.params.customerid;
 
@@ -135,9 +157,13 @@ app.post("/viewall/:customerid/transferto/:transfercid",async(req,res)=> {
         });
         console.log(Transfers);
 
-        // console.log(transfertocust.currentBalance);
         s=0;
         res.redirect("/successfultransaction");
+    }
+    }
+    catch(error) {
+        console.error(error);
+        process.exit(1);
     }
 });
 
