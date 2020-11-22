@@ -26,28 +26,14 @@ let transferSchema = new mongoose.Schema({
 let Customers = mongoose.model("Customers",customerSchema);
 let Transfers = mongoose.model("Transfers",transferSchema);
 
-// Customers.deleteMany({},(err,record)=> {
-//     if(err)
-//         console.log(err);
-//     else    
-//         console.log(record);
-// })
-
-Transfers.deleteMany({},(err,record)=> {
-    if(err)
-        console.log(err);
-    else    
-        console.log(record);
-})
 
 app.get("/",async(req,res)=> {
     res.render("home");
 });
 
 app.get("/viewall",async(req,res)=> {
-    let record;
     try {
-        record = await Customers.find({});
+        let record = await Customers.find({});
         res.render("viewall",{customers:record});
     }
     catch (err) {
@@ -118,7 +104,7 @@ app.post("/viewall/:customerid/transferto/:transfercid",async(req,res)=> {
     if(amount > customer.currentBalance)
     {
         let url = "/viewall/" + cid + "/transferto/" + transfercid; 
-        // console.log(url);
+    
         console.log("Insufficient balance for money transfer!!");
         s=1;
         res.redirect(url);
