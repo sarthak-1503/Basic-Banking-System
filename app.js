@@ -2,14 +2,15 @@ let express = require("express");
 let bodyParser = require("body-parser");
 let mongoose = require("mongoose");
 let nodemon = require("nodemon");
+let http = require("http");
 let app = express();
-
+let dotenv = require("dotenv");
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 
 // const port = 80;
 
-mongoose.connect("mongodb://localhost/bbsdb",{useNewUrlParser: true,useUnifiedTopology:true});
+mongoose.connect("process.env.MONGODB_URI || mongodb://localhost/bbsdb",{useNewUrlParser: true,useUnifiedTopology:true});
 
 let customerSchema = new mongoose.Schema({
     name: String,
@@ -168,6 +169,10 @@ app.get("/successfultransaction",(req,res)=> {
     res.render("success");
 });
 
-app.listen(process.env.PORT || 80,()=> {
-    console.log("The server is listening!!");
-});
+// http.createServer((req,res)=> {
+//     console.log("Hey! my website is working...");
+//     res.end();
+// })
+app.listen(process.env.PORT || 80,process.env.IP, ()=> {
+        console.log("The server is listening!!");
+    });
