@@ -26,12 +26,12 @@ let transferSchema = new mongoose.Schema({
 let Customers = mongoose.model("Customers",customerSchema);
 let Transfers = mongoose.model("Transfers",transferSchema);
 
-Customers.deleteMany({},(err,record)=> {
-    if(err)
-        console.log(err);
-    else    
-        console.log(record);
-})
+// Customers.deleteMany({},(err,record)=> {
+//     if(err)
+//         console.log(err);
+//     else    
+//         console.log(record);
+// })
 
 Transfers.deleteMany({},(err,record)=> {
     if(err)
@@ -40,7 +40,7 @@ Transfers.deleteMany({},(err,record)=> {
         console.log(record);
 })
 
-app.get("/",(req,res)=> {
+app.get("/",async(req,res)=> {
     res.render("home");
 });
 
