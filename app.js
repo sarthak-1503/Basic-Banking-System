@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 // const port = 80;
 
-mongoose.connect("process.env.MONGODB_URI || mongodb://localhost/bbsdb",{useNewUrlParser: true,useUnifiedTopology:true});
+mongoose.connect("mongodb://localhost:27017/bbsdb",{useNewUrlParser: true,useUnifiedTopology:true});
 
 let customerSchema = new mongoose.Schema({
     name: String,
