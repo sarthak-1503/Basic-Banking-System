@@ -4,7 +4,7 @@ let mongoose = require("mongoose");
 let nodemon = require("nodemon");
 let http = require("http");
 let app = express();
-let dotenv = require("dotenv");
+let dotenv = require("dotenv").config();
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 
@@ -35,12 +35,13 @@ app.get("/",async(req,res)=> {
 app.get("/viewall",async(req,res)=> {
     try {
         let record = await Customers.find({});
-        res.render("viewall",{customers:record});
+        
     }
     catch (err) {
         console.error(error);
         process.exit(1);
     }
+    res.render("viewall",{customers:record});
 });
 
 app.get("/viewall/:customerid",async(req,res)=> {
@@ -169,10 +170,6 @@ app.get("/successfultransaction",(req,res)=> {
     res.render("success");
 });
 
-// http.createServer((req,res)=> {
-//     console.log("Hey! my website is working...");
-//     res.end();
-// })
 app.listen(process.env.PORT || 80,process.env.IP, ()=> {
         console.log("The server is listening!!");
     });
