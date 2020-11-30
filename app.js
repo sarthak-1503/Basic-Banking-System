@@ -35,13 +35,12 @@ app.get("/",async(req,res)=> {
 app.get("/viewall",async(req,res)=> {
     try {
         let record = await Customers.find({});
-        
+        res.render("viewall",{customers:record});
     }
     catch (err) {
         console.error(error);
         process.exit(1);
     }
-    res.render("viewall",{customers:record});
 });
 
 app.get("/viewall/:customerid",async(req,res)=> {
