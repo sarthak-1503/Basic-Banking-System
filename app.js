@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 // const port = 80;
 
-mongoose.connect("mongodb://localhost:27017/bbsdb",{useNewUrlParser: true,useUnifiedTopology:true});
+mongoose.connect("mongodb://localhost:27017 || ${process.env.DB_HOST}/bbsdb",{useNewUrlParser: true,useUnifiedTopology:true});
 
 let customerSchema = new mongoose.Schema({
     name: String,
@@ -169,6 +169,6 @@ app.get("/successfultransaction",(req,res)=> {
     res.render("success");
 });
 
-app.listen(process.env.PORT || 3000,process.env.IP, ()=> {
+app.listen(process.env.PORT || 80,process.env.IP, ()=> {
         console.log("The server is listening!!");
     });
