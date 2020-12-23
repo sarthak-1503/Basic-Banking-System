@@ -6,11 +6,17 @@ let http = require("http");
 let app = express();
 let dotenv = require("dotenv").config();
 app.set("view engine","ejs");
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({extended:true})); 
 
+let dbUrl = process.env.DB_URL || "mongodb://localhost:27017/bbsdb";
 // const port = 80;
 
-mongoose.connect("mongodb://localhost:27017 || ${process.env.DB_HOST}/bbsdb",{useNewUrlParser: true,useUnifiedTopology:true});
+mongoose.connect(dbUrl,{
+    useNewUrlParser: true,
+    useUnifiedTopology:true,
+    useCreateIndex: true,
+    useFindAndModify: false
+});
 
 let customerSchema = new mongoose.Schema({
     name: String,
