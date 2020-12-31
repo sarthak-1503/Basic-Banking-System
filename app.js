@@ -174,6 +174,6 @@ app.get("/successfultransaction",(req,res)=> {
     res.render("success");
 });
 
-app.listen(process.env.PORT || 80, ()=> {
+app.listen(process.env.PORT || 3000,process.env.IP, ()=> {
         console.log("The server is listening!!");
     });
