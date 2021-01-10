@@ -1,7 +1,6 @@
 let express = require("express");
 let bodyParser = require("body-parser");
 let mongoose = require("mongoose");
-// let mysql = require("mysql");
 let nodemon = require("nodemon");
 let app = express();
 let dotenv = require("dotenv").config();
@@ -9,7 +8,7 @@ app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true})); 
 
 let dbUrl = "mongodb://localhost:27017/bbsdb";
-const port = 80;
+// const port = 80;
 
 mongoose.connect(dbUrl,{
     useNewUrlParser: true,
@@ -35,7 +34,14 @@ let Transfers = mongoose.model("Transfers",transferSchema);
 
 
 app.get("/",async(req,res)=> {
-    res.render("home");
+    try {
+        res.render("home");
+    }
+
+    catch(error) {
+        console.log(error);
+        process.exit(1);
+    }
 });
 
 app.get("/viewall",async(req,res)=> {
