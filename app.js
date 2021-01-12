@@ -4,11 +4,13 @@ let mongoose = require("mongoose");
 let nodemon = require("nodemon");
 let app = express();
 let dotenv = require("dotenv").config();
+let sqlite = require("sqlite3").verbose();
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true})); 
+let Cache = require('memory-cache');
 
 let dbUrl = "mongodb://localhost:27017/bbsdb";
-// const port = 80;
+const port = process.env.PORT || 3000;
 
 mongoose.connect(dbUrl,{
     useNewUrlParser: true,
@@ -16,6 +18,25 @@ mongoose.connect(dbUrl,{
     useCreateIndex: true,
     useFindAndModify: false
 });
+
+let memCache = new cache.Cache();
+    let cacheMiddleware = (duration) => {
+        return (req, res, next) => {
+            let key =  '__express__' + req.originalUrl || req.url
+            let cacheContent = memCache.get(key);
+            if(cacheContent){
+                res.send( cacheContent );
+                return
+            }else{
+                res.sendResponse = res.send
+                res.send = (body) => {
+                    memCache.put(key,body,duration*1000);
+                    res.sendResponse(body)
+                }
+                next()
+            }
+        }
+    }
 
 let customerSchema = new mongoose.Schema({
     name: String,
@@ -33,7 +54,7 @@ let Customers = mongoose.model("Customers",customerSchema);
 let Transfers = mongoose.model("Transfers",transferSchema);
 
 
-app.get("/",async(req,res)=> {
+app.get("/",cacheMiddleware(30),async(req,res)=> {
     try {
         res.render("home");
     }
@@ -44,7 +65,7 @@ app.get("/",async(req,res)=> {
     }
 });
 
-app.get("/viewall",async(req,res)=> {
+app.get("/viewall",cacheMiddleware(30),async(req,res)=> {
     try {
         let record = await Customers.find({});
         res.render("viewall",{customers:record});
@@ -55,7 +76,7 @@ app.get("/viewall",async(req,res)=> {
     }
 });
 
-app.get("/viewall/:customerid",async(req,res)=> {
+app.get("/viewall/:customerid",cacheMiddleware(30),async(req,res)=> {
     try {
         let cid = req.params.customerid;
 
@@ -69,7 +90,7 @@ app.get("/viewall/:customerid",async(req,res)=> {
     }
 });
 
-app.get("/viewall/:customerid/transferto",async(req,res)=> {
+app.get("/viewall/:customerid/transferto",cacheMiddleware(30),async(req,res)=> {
     
     try {
         let cid = req.params.customerid;
@@ -84,7 +105,7 @@ app.get("/viewall/:customerid/transferto",async(req,res)=> {
     }
 });
 let s = 0;
-app.get("/viewall/:customerid/transferto/:transfercid",async(req,res)=> {
+app.get("/viewall/:customerid/transferto/:transfercid",cacheMiddleware(30),async(req,res)=> {
     
     try {
         let cid = req.params.customerid;
@@ -104,7 +125,7 @@ app.get("/viewall/:customerid/transferto/:transfercid",async(req,res)=> {
 
 
 
-app.post("/viewall/:customerid/transferto/:transfercid",async(req,res)=> {
+app.post("/viewall/:customerid/transferto/:transfercid",cacheMiddleware(30),async(req,res)=> {
     try {
         let amount = req.body.amount;
         let transfercid = req.params.transfercid;
@@ -165,7 +186,7 @@ app.post("/viewall/:customerid/transferto/:transfercid",async(req,res)=> {
     }
 });
 
-app.get("/transfers",async(req,res)=> {
+app.get("/transfers",cacheMiddleware(30),async(req,res)=> {
     try {
         let transfers = await Transfers.find({});
         res.render("transferrecords",{transfers:transfers});
@@ -176,10 +197,10 @@ app.get("/transfers",async(req,res)=> {
     }
 });
 
-app.get("/successfultransaction",(req,res)=> {
+app.get("/successfultransaction",cacheMiddleware(30),(req,res)=> {
     res.render("success");
 });
 
-app.listen(process.env.PORT || 3000,process.env.IP, ()=> {
+app.listen(port,process.env.IP, ()=> {
         console.log("The server is listening!!");
     });
