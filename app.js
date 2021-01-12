@@ -20,7 +20,7 @@ const secret = process.env.SECRET || "keepthisasasecret";
 const store = new MongoStore({
     url: dbUrl,
     secret,
-    touchAfter: 24*3600 // in seconds
+    touchAfter: 24 * 3600 // in seconds
 });
 
 store.on("error",(e)=> {
