@@ -4,7 +4,6 @@ let mongoose = require("mongoose");
 let nodemon = require("nodemon");
 let app = express();
 let dotenv = require("dotenv").config();
-let sqlite = require("sqlite3").verbose();
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true})); 
 let Cache = require('memory-cache');
