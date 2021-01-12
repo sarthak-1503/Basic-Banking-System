@@ -1,14 +1,43 @@
+if(process.env.NODE_ENV != "production") {
+    require("dotenv").config();
+}
+
 let express = require("express");
 let bodyParser = require("body-parser");
 let mongoose = require("mongoose");
 let nodemon = require("nodemon");
+let nodemon = require("ejs");
+let cache = require('memory-cache');
 let app = express();
-let dotenv = require("dotenv").config();
+let session = require("express-session");
+let MongoStore = require("connect-mongo")(session);
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true})); 
-let Cache = require('memory-cache');
 
-let dbUrl = "mongodb://localhost:27017/bbsdb";
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/bbsdb";
+const secret = process.env.SECRET || "keepthisasasecret";
+
+const store = new MongoStore({
+    url: dbUrl,
+    secret,
+    touchAfter: 24*3600 // in seconds
+});
+
+store.on("error",(e)=> {
+    console.log("Session Store error: ",e);
+});
+
+const sessionConfig = {
+    store,
+    name: 'session',
+    secret,
+    resave: false,
+    saveUninitialized: true
+};
+
+app.use(session(sessionConfig));
+
+
 const port = process.env.PORT || 3000;
 
 mongoose.connect(dbUrl,{
