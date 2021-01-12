@@ -83,59 +83,59 @@ let Transfers = mongoose.model("Transfers",transferSchema);
 
 
 app.get("/",cacheMiddleware(30),async(req,res)=> {
-    try {
+    // try {
         res.render("home");
-    }
+    // }
 
-    catch(error) {
-        console.log(error);
-        process.exit(1);
-    }
+    // catch(error) {
+    //     console.log(error);
+    //     process.exit(1);
+    // }
 });
 
 app.get("/viewall",cacheMiddleware(30),async(req,res)=> {
-    try {
+   // try {
         let record = await Customers.find({});
         res.render("viewall",{customers:record});
-    }
-    catch (err) {
-        console.error(error);
-        process.exit(1);
-    }
+   // }
+   // catch (err) {
+    //     console.error(error);
+    //     process.exit(1);
+    // }
 });
 
 app.get("/viewall/:customerid",cacheMiddleware(30),async(req,res)=> {
-    try {
+    // try {
         let cid = req.params.customerid;
 
         let record = await Customers.findOne({_id:cid});
         let allcustomers = await Customers.find({});
         res.render("customerpage",{record:record,customers:allcustomers});
-    }
-    catch (err) {
-        console.error(error);
-        process.exit(1);
-    }
+    // }
+    // catch (err) {
+    //     console.error(error);
+    //     process.exit(1);
+    // }
 });
 
 app.get("/viewall/:customerid/transferto",cacheMiddleware(30),async(req,res)=> {
     
-    try {
+    // try {
         let cid = req.params.customerid;
     let record = await Customers.findOne({_id:cid});
     let customers = await Customers.find({});
 
     res.render("transfertocustomers",{record:record,customers:customers});
-    }
-    catch (err) {
-        console.error(error);
-        process.exit(1);
-    }
+    // }
+    // catch (err) {
+    //     console.error(error);
+    //     process.exit(1);
+    // }
 });
 let s = 0;
 app.get("/viewall/:customerid/transferto/:transfercid",cacheMiddleware(30),async(req,res)=> {
     
-    try {
+    // try {
         let cid = req.params.customerid;
         let transfercid = req.params.transfercid;
         let record = await Customers.findOne({_id:cid});
@@ -143,18 +143,18 @@ app.get("/viewall/:customerid/transferto/:transfercid",cacheMiddleware(30),async
         let customers = await Customers.find({});
 
         res.render("transferpage",{transfercust:transfercust,record:record,customers:customers,s:s});
-    }
-    catch (err) {
-        console.error(error);
-        process.exit(1);
-    }
+    // }
+    // catch (err) {
+    //     console.error(error);
+    //     process.exit(1);
+    // }
     
 });
 
 
 
 app.post("/viewall/:customerid/transferto/:transfercid",cacheMiddleware(30),async(req,res)=> {
-    try {
+    // try {
         let amount = req.body.amount;
         let transfercid = req.params.transfercid;
         let cid = req.params.customerid;
@@ -207,28 +207,28 @@ app.post("/viewall/:customerid/transferto/:transfercid",cacheMiddleware(30),asyn
             s=0;
             res.redirect("/successfultransaction");
         }
-    }
-    catch(error) {
-        console.error(error);
-        process.exit(1);
-    }
+    // }
+    // catch(error) {
+    //     console.error(error);
+    //     process.exit(1);
+    // }
 });
 
 app.get("/transfers",cacheMiddleware(30),async(req,res)=> {
-    try {
+    // try {
         let transfers = await Transfers.find({});
         res.render("transferrecords",{transfers:transfers});
-    }
-    catch(error) {
-        console.error(error);
-        process.exit(1);
-    }
+    // }
+    // catch(error) {
+    //     console.error(error);
+    //     process.exit(1);
+    // }
 });
 
 app.get("/successfultransaction",cacheMiddleware(30),(req,res)=> {
     res.render("success");
 });
 
-app.listen(port,process.env.IP, ()=> {
+app.listen(port, ()=> {
         console.log("The server is listening!!");
     });
