@@ -17,6 +17,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "memory-cache": "^0.2.0",
-    "mongoose": "^5.10.13"
+    "mongoose": "^5.10.13",
+    "nodemon":"^2.0.7"
   }
 }
