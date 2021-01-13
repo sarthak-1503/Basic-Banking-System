@@ -8,11 +8,13 @@ let mongoose = require("mongoose");
 let nodemon = require("nodemon");
 let ejs = require("ejs");
 let cache = require('memory-cache');
+let favicon = require("serve-favicon");
 let app = express();
 let session = require("express-session");
 let MongoStore = require("connect-mongo")(session);
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true})); 
+app.use(favicon('./public/images/favicon.ico'));
 
 const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/bbsdb";
 const secret = process.env.SECRET || "keepthisasasecret";
