@@ -84,60 +84,60 @@ let transferSchema = new mongoose.Schema({
 let Customers = mongoose.model("Customers",customerSchema);
 let Transfers = mongoose.model("Transfers",transferSchema);
 
-Customers.insertMany([{
-    name: "Abhinav",
-    email: "abhinav@gmail.com",
-    currentBalance: 10000
-},
-{
-    name: "Japnit",
-    email: "japnit@gmail.com",
-    currentBalance: 10000
-},
-{
-    name: "Sambhav",
-    email: "sambhav@gmail.com",
-    currentBalance: 10000
-},
-{
-    name: "Sarthak",
-    email: "sarthak@gmail.com",
-    currentBalance: 10000
-},
-{
-    name: "Tushar",
-    email: "tushar@gmail.com",
-    currentBalance: 10000
-},
-{
-    name: "Akshita",
-    email: "akshita@gmail.com",
-    currentBalance: 10000
-},
-{
-    name: "Janvi",
-    email: "janvi@gmail.com",
-    currentBalance: 10000
-},
-{
-    name: "Saurabh",
-    email: "saurabh@gmail.com",
-    currentBalance: 10000
-},
-{
-    name: "Utkarsh",
-    email: "utkarsh@gmail.com",
-    currentBalance: 10000
-},
-{
-    name: "Shivam",
-    email: "shivam@gmail.com",
-    currentBalance: 10000
-}]).then(function(){ 
-    console.log("Data inserted")  // Success 
-}).catch(function(error){ 
-    console.log(error)      // Failure 
-}); 
+// Customers.insertMany([{
+//     name: "Abhinav",
+//     email: "abhinav@gmail.com",
+//     currentBalance: 10000
+// },
+// {
+//     name: "Japnit",
+//     email: "japnit@gmail.com",
+//     currentBalance: 10000
+// },
+// {
+//     name: "Sambhav",
+//     email: "sambhav@gmail.com",
+//     currentBalance: 10000
+// },
+// {
+//     name: "Sarthak",
+//     email: "sarthak@gmail.com",
+//     currentBalance: 10000
+// },
+// {
+//     name: "Tushar",
+//     email: "tushar@gmail.com",
+//     currentBalance: 10000
+// },
+// {
+//     name: "Akshita",
+//     email: "akshita@gmail.com",
+//     currentBalance: 10000
+// },
+// {
+//     name: "Janvi",
+//     email: "janvi@gmail.com",
+//     currentBalance: 10000
+// },
+// {
+//     name: "Saurabh",
+//     email: "saurabh@gmail.com",
+//     currentBalance: 10000
+// },
+// {
+//     name: "Utkarsh",
+//     email: "utkarsh@gmail.com",
+//     currentBalance: 10000
+// },
+// {
+//     name: "Shivam",
+//     email: "shivam@gmail.com",
+//     currentBalance: 10000
+// }]).then(function(){ 
+//     console.log("Data inserted")  // Success 
+// }).catch(function(error){ 
+//     console.log(error)      // Failure 
+// }); 
 
 
 app.get("/",cacheMiddleware(30),async(req,res)=> {
