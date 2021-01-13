@@ -153,7 +153,7 @@ app.get("/viewall/:customerid/transferto/:transfercid",cacheMiddleware(30),async
 
 
 
-app.post("/viewall/:customerid/transferto/:transfercid",cacheMiddleware(30),async(req,res)=> {
+app.post("/viewall/:customerid/transferto/:transfercid",async(req,res)=> {
     // try {
         let amount = req.body.amount;
         let transfercid = req.params.transfercid;
