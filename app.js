@@ -140,7 +140,7 @@ let Transfers = mongoose.model("Transfers",transferSchema);
 // }); 
 
 
-app.get("/",cacheMiddleware(30),async(req,res)=> {
+app.get("/",cacheMiddleware(30),(req,res)=> {
         res.render("home");
 });
 
@@ -246,5 +246,5 @@ app.get("/successfultransaction",cacheMiddleware(30),(req,res)=> {
 });
 
 app.listen(port, ()=> {
-        console.log(`The server is listening on port ${port}!!`);
+        console.log(`The server is listening on port ${port}`);
     });
