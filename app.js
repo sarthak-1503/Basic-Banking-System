@@ -41,7 +41,7 @@ app.use(session(sessionConfig));
 
 
 const port = process.env.PORT || 3000;
-// app.set("port",port);
+app.set("port",port);
 
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
