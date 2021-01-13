@@ -84,125 +84,60 @@ let transferSchema = new mongoose.Schema({
 let Customers = mongoose.model("Customers",customerSchema);
 let Transfers = mongoose.model("Transfers",transferSchema);
 
-Customers.insert({
+Customers.insertMany([{
     name: "Abhinav",
     email: "abhinav@gmail.com",
     currentBalance: 10000
-},(err,info)=> {
-    if(err) {
-        console.log(err);
-    }else {
-        console.log(info);
-    }
-});
-
-Customers.insert({
+},
+{
     name: "Japnit",
     email: "japnit@gmail.com",
     currentBalance: 10000
-},(err,info)=> {
-    if(err) {
-        console.log(err);
-    }else {
-        console.log(info);
-    }
-});
-
-Customers.insert({
+},
+{
     name: "Sambhav",
     email: "sambhav@gmail.com",
     currentBalance: 10000
-},(err,info)=> {
-    if(err) {
-        console.log(err);
-    }else {
-        console.log(info);
-    }
-});
-
-Customers.insert({
+},
+{
     name: "Sarthak",
     email: "sarthak@gmail.com",
     currentBalance: 10000
-},(err,info)=> {
-    if(err) {
-        console.log(err);
-    }else {
-        console.log(info);
-    }
-});
-
-Customers.insert({
+},
+{
     name: "Tushar",
     email: "tushar@gmail.com",
     currentBalance: 10000
-},(err,info)=> {
-    if(err) {
-        console.log(err);
-    }else {
-        console.log(info);
-    }
-});
-
-Customers.insert({
+},
+{
     name: "Akshita",
     email: "akshita@gmail.com",
     currentBalance: 10000
-},(err,info)=> {
-    if(err) {
-        console.log(err);
-    }else {
-        console.log(info);
-    }
-});
-
-Customers.insert({
+},
+{
     name: "Janvi",
     email: "janvi@gmail.com",
     currentBalance: 10000
-},(err,info)=> {
-    if(err) {
-        console.log(err);
-    }else {
-        console.log(info);
-    }
-});
-
-Customers.insert({
+},
+{
     name: "Saurabh",
     email: "saurabh@gmail.com",
     currentBalance: 10000
-},(err,info)=> {
-    if(err) {
-        console.log(err);
-    }else {
-        console.log(info);
-    }
-});
-
-Customers.insert({
+},
+{
     name: "Utkarsh",
     email: "utkarsh@gmail.com",
     currentBalance: 10000
-},(err,info)=> {
-    if(err) {
-        console.log(err);
-    }else {
-        console.log(info);
-    }
-});
-
-Customers.insert({
+},
+{
     name: "Shivam",
     email: "shivam@gmail.com",
     currentBalance: 10000
-},(err,info)=> {
-    if(err) {
-        console.log(err);
-    }else {
-        console.log(info);
-    }
-});
+}]).then(function(){ 
+    console.log("Data inserted")  // Success 
+}).catch(function(error){ 
+    console.log(error)      // Failure 
+}); 
 
 
 app.get("/",cacheMiddleware(30),async(req,res)=> {
