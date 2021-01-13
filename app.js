@@ -84,61 +84,156 @@ let transferSchema = new mongoose.Schema({
 let Customers = mongoose.model("Customers",customerSchema);
 let Transfers = mongoose.model("Transfers",transferSchema);
 
+Customers.insert({
+    name: "Abhinav",
+    email: "abhinav@gmail.com",
+    currentBalance: 10000
+},(err,info)=> {
+    if(err) {
+        console.log(err);
+    }else {
+        console.log(info);
+    }
+});
+
+Customers.insert({
+    name: "Japnit",
+    email: "japnit@gmail.com",
+    currentBalance: 10000
+},(err,info)=> {
+    if(err) {
+        console.log(err);
+    }else {
+        console.log(info);
+    }
+});
+
+Customers.insert({
+    name: "Sambhav",
+    email: "sambhav@gmail.com",
+    currentBalance: 10000
+},(err,info)=> {
+    if(err) {
+        console.log(err);
+    }else {
+        console.log(info);
+    }
+});
+
+Customers.insert({
+    name: "Sarthak",
+    email: "sarthak@gmail.com",
+    currentBalance: 10000
+},(err,info)=> {
+    if(err) {
+        console.log(err);
+    }else {
+        console.log(info);
+    }
+});
+
+Customers.insert({
+    name: "Tushar",
+    email: "tushar@gmail.com",
+    currentBalance: 10000
+},(err,info)=> {
+    if(err) {
+        console.log(err);
+    }else {
+        console.log(info);
+    }
+});
+
+Customers.insert({
+    name: "Akshita",
+    email: "akshita@gmail.com",
+    currentBalance: 10000
+},(err,info)=> {
+    if(err) {
+        console.log(err);
+    }else {
+        console.log(info);
+    }
+});
+
+Customers.insert({
+    name: "Janvi",
+    email: "janvi@gmail.com",
+    currentBalance: 10000
+},(err,info)=> {
+    if(err) {
+        console.log(err);
+    }else {
+        console.log(info);
+    }
+});
+
+Customers.insert({
+    name: "Saurabh",
+    email: "saurabh@gmail.com",
+    currentBalance: 10000
+},(err,info)=> {
+    if(err) {
+        console.log(err);
+    }else {
+        console.log(info);
+    }
+});
+
+Customers.insert({
+    name: "Utkarsh",
+    email: "utkarsh@gmail.com",
+    currentBalance: 10000
+},(err,info)=> {
+    if(err) {
+        console.log(err);
+    }else {
+        console.log(info);
+    }
+});
+
+Customers.insert({
+    name: "Shivam",
+    email: "shivam@gmail.com",
+    currentBalance: 10000
+},(err,info)=> {
+    if(err) {
+        console.log(err);
+    }else {
+        console.log(info);
+    }
+});
+
 
 app.get("/",cacheMiddleware(30),async(req,res)=> {
-    // try {
         res.render("home");
-    // }
-
-    // catch(error) {
-    //     console.log(error);
-    //     process.exit(1);
-    // }
 });
 
 app.get("/viewall",cacheMiddleware(30),async(req,res)=> {
-   // try {
         let record = await Customers.find({});
         res.render("viewall",{customers:record});
-   // }
-   // catch (err) {
-    //     console.error(error);
-    //     process.exit(1);
-    // }
+
 });
 
 app.get("/viewall/:customerid",cacheMiddleware(30),async(req,res)=> {
-    // try {
         let cid = req.params.customerid;
 
         let record = await Customers.findOne({_id:cid});
         let allcustomers = await Customers.find({});
         res.render("customerpage",{record:record,customers:allcustomers});
-    // }
-    // catch (err) {
-    //     console.error(error);
-    //     process.exit(1);
-    // }
 });
 
 app.get("/viewall/:customerid/transferto",cacheMiddleware(30),async(req,res)=> {
     
-    // try {
         let cid = req.params.customerid;
     let record = await Customers.findOne({_id:cid});
     let customers = await Customers.find({});
 
     res.render("transfertocustomers",{record:record,customers:customers});
-    // }
-    // catch (err) {
-    //     console.error(error);
-    //     process.exit(1);
-    // }
 });
 let s = 0;
 app.get("/viewall/:customerid/transferto/:transfercid",cacheMiddleware(30),async(req,res)=> {
     
-    // try {
         let cid = req.params.customerid;
         let transfercid = req.params.transfercid;
         let record = await Customers.findOne({_id:cid});
@@ -146,18 +241,12 @@ app.get("/viewall/:customerid/transferto/:transfercid",cacheMiddleware(30),async
         let customers = await Customers.find({});
 
         res.render("transferpage",{transfercust:transfercust,record:record,customers:customers,s:s});
-    // }
-    // catch (err) {
-    //     console.error(error);
-    //     process.exit(1);
-    // }
     
 });
 
 
 
 app.post("/viewall/:customerid/transferto/:transfercid",async(req,res)=> {
-    // try {
         let amount = req.body.amount;
         let transfercid = req.params.transfercid;
         let cid = req.params.customerid;
@@ -210,22 +299,11 @@ app.post("/viewall/:customerid/transferto/:transfercid",async(req,res)=> {
             s=0;
             res.redirect("/successfultransaction");
         }
-    // }
-    // catch(error) {
-    //     console.error(error);
-    //     process.exit(1);
-    // }
 });
 
 app.get("/transfers",cacheMiddleware(30),async(req,res)=> {
-    // try {
         let transfers = await Transfers.find({});
         res.render("transferrecords",{transfers:transfers});
-    // }
-    // catch(error) {
-    //     console.error(error);
-    //     process.exit(1);
-    // }
 });
 
 app.get("/successfultransaction",cacheMiddleware(30),(req,res)=> {
