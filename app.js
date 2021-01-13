@@ -40,7 +40,7 @@ app.use(session(sessionConfig));
 
 const port = process.env.PORT || 3000;
 
-mongoose.connect(dbUrl,{
+mongoose.connect(dbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology:true,
     useCreateIndex: true,
