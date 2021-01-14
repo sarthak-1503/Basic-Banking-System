@@ -179,8 +179,6 @@ app.get("/viewall/:customerid/transferto/:transfercid",cacheMiddleware(30),async
     
 });
 
-
-
 app.post("/viewall/:customerid/transferto/:transfercid",async(req,res)=> {
         let amount = req.body.amount;
         let transfercid = req.params.transfercid;

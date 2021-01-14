@@ -6,13 +6,39 @@
         margin: auto 0.8rem;
         cursor: pointer;
     }
+    #hoverrows1 {
+        background-color: rgb(243, 190, 75)
+    }
+    #hoverrows2 {
+        background-color: rgb(248, 146, 78);
+    }
+    #hoverrows1:hover {
+        background-color: rgb(209, 149, 236);
+        /* text-shadow: -0.5rem 0.5rem red; */
+        /* text-transform: uppercase; */
+        /* table-layout: fixed; */
+        font-size: 1rem;
+        color: blue;
+        font-weight: bold;
+    } 
+    #hoverrows2:hover {
+        background-color: rgb(209, 149, 236);
+        /* text-shadow: -0.5rem 0.5rem red; */
+        /* text-transform: uppercase; */
+        /* table-layout: fixed; */
+        font-size: 1rem;
+        color: blue;
+        font-weight: bold;
+    } 
     #eye {
         cursor: pointer;
+        color: black;
     }
     #eye:hover {
-        color: #1A73E8;
-        opacity: 0.6;
+        color: rgb(82, 82, 224);
+        /* opacity: 0.6; */
     }
+    
 </style>
 
 <div>
@@ -27,7 +53,10 @@
 
 <div class="container">
     <table style="border: 2px solid black;">
-        <tr>
+        <tr style="background-color: rgb(240, 104, 81);">
+            <th style="padding: 0.8rem 1.5rem;">
+                <strong>S.No.</strong>
+            </th>
             <th>
                 <strong>Customer Name</strong>
             </th>
@@ -35,29 +64,53 @@
                 <strong>Email ID</strong>
             </th>
             <th>
-                <strong>Current Balance</strong>
+                <strong>Current Balance (Rs.)</strong>
             </th>
             <th></th>
         </tr>
         <%var i;%> 
         <%for(i=0;i<customers.length;i++) {%>
-            <tr>
-                <td>
-                    <%=customers[i].name%>
-                </td>
-                <td>
-                    <%=customers[i].email%>
-                </td>
-                <td>
-                    <%=customers[i].currentBalance%>
-                </td>
-                <td>
-                   
-                    <i class="fas fa-eye" id="eye" style="font-size: 1.7rem;" onclick="window.location.href='/viewall/<%=customers[i]._id%>'"></i>
-                </td>
-            </tr>
+            <%if(i%2 == 0) {%>
+                <tr id="hoverrows1" >
+                    <td style="padding: 0.8rem 1.5rem;">
+                        <strong><%=(i+1)%></strong>
+                    </td>
+                    <td>
+                        <%=customers[i].name%>
+                    </td>
+                    <td>
+                        <%=customers[i].email%>
+                    </td>
+                    <td>
+                        <%=customers[i].currentBalance%>
+                    </td>
+                    <td>
+                        <i class="fas fa-eye" id="eye" style="font-size: 1.9rem;" onclick="window.location.href='/viewall/<%=customers[i]._id%>'"></i>
+                    </td>
+                </tr>
+            <%}else{%>
+                <tr id="hoverrows2" >
+                    <td style="padding: 0.8rem 1.5rem;">
+                        <strong><%=(i+1)%></strong>
+                    </td>
+                    <td>
+                        <%=customers[i].name%>
+                    </td>
+                    <td>
+                        <%=customers[i].email%>
+                    </td>
+                    <td>
+                        <%=customers[i].currentBalance%>
+                    </td>
+                    <td>
+                        <i class="fas fa-eye" id="eye" style="font-size: 1.9rem;" onclick="window.location.href='/viewall/<%=customers[i]._id%>'"></i>
+                    </td>
+                </tr>
+            <%}%>
         <%}%>
     </table>
 </div>
+
+
 
 <%- include("partials/footer") %>
