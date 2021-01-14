@@ -30,12 +30,25 @@
         .container {
             text-align: center;
             align-self: center;
-            /* border: 2px solid black; */
+        }
+
+        @media screen and (max-width: 500px) {
+            #homediv {
+                background-size: 100%;
+                background-color:#1A73E8;
+                margin: 0;
+            }
+            #home {
+                margin: 0.8rem;
+                color: white;
+            }
         }
     </style>
 
     <div id="homediv">
-        <i class="fa fa-home" aria-hidden="true" id="home" style="font-size: 2.5rem;" onclick="window.location.href='/'" title="Home"></i>
+        <div id="icon">
+            <i class="fa fa-home" aria-hidden="true" id="home" style="font-size: 2.5rem;" onclick="window.location.href='/'" title="Home"></i>
+        </div>
     </div>
 
     <style>
