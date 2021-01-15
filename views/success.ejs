@@ -1,5 +1,47 @@
+<%- include("partials/header") %>
+
+<style>
+    .icons {
+        margin: 5.1rem;
+    }
+    .icons:hover {
+        cursor: pointer;
+        color: rgb(82, 82, 224);
+    }
+</style>
 
 <script>
-    alert("Transaction successful!!");
-    window.location.replace("/viewall");
+    var t = true;
+    setInterval(rollingBorder,300);
+
+    function rollingBorder() {
+        var success = document.querySelector("#wave");
+        if(t == true) {
+            success.style.border = "9px dashed rgb(41, 196, 41)";
+        }
+        else {
+            success.style.border = "10px dashed rgb(41, 196, 41)";
+        }
+        (t == true)? t=false : t=true;
+    }
+
 </script>
+
+<div style="text-align: center; margin: 0 auto 2rem auto; width: 20%; ">
+    <i id="wave" style="font-size: 10rem; color: rgb(41, 196, 41); border: 10px dashed rgb(41, 196, 41);padding: 3.0.8rem; text-align:center; margin: 3rem auto 1rem auto; border-radius: 50%;" class="fas fa-check-circle"></i>
+    <h2 style="text-align: center; margin: 1rem auto; color: rgb(9, 9, 71); font-size: 2.7rem;">Payment successful</h2>
+</div>
+
+<div style="width: 85%; text-align: center; margin: 7rem auto 0 auto;">
+    <span class="icons">
+        <i class="fas fa-exchange-alt" onclick="window.location.href='<%=record%>'" title="Make another payment" style="margin-right: 4rem; font-size: 5rem;"></i>
+    </span>
+    <span class="icons">
+        <i class="fa fa-users 10x"  aria-hidden="true" style="margin-right: 4rem; font-size: 5rem;" onclick="window.location.href='/viewall'" title="View All Customers"></i>
+    </span>
+    <span class="icons">
+        <i class="fas fa-history" aria-hidden="true" style="margin-right: 4rem; font-size: 5rem;" onclick="window.location.href='/transfers'" title="View Transfer Records"></i>
+    </span>
+</div>
+
+<%- include("partials/footer") %>

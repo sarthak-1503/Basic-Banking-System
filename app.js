@@ -139,6 +139,49 @@ let Transfers = mongoose.model("Transfers",transferSchema);
 //     console.log(error)      // Failure 
 // }); 
 
+// Customers.findOneAndUpdate({name:"Sambhav"},{$set: {name:"Jigisha",email:"jigisha@gmail.com"}},(err,record)=> {
+//     if(err) {
+//         console.log(err);
+//     }
+//     else {
+//         console.log(record);
+//     }
+// })
+
+// <div>
+// <table>
+    // <tr>
+    //    <th>Name</th>
+    //    <th>Email ID</th>
+    //    <th>Current Balance</th> 
+    //    <th style="color: rgb(230, 152, 64);"></th>
+    // </tr>
+    // <% for(var i=0;i<10;i++) {%>
+
+    //     <%let cid = JSON.stringify(customers[i]._id) %>
+    //     <%let rid = JSON.stringify(record._id) %>
+        
+    //     <%if(cid.localeCompare(rid)) {%>
+    //         <tr>
+    //             <td><%=customers[i].name%></td>
+    //             <td><%=customers[i].email%></td>
+    //             <td><%=customers[i].currentBalance%></td>
+    //             <td>
+    //                 <%if(JSON.stringify(transfercust._id).localeCompare(JSON.stringify(customers[i]._id))) {%>
+    //                     <i class="fas fa-exchange-alt" id="transfer" onclick="window.location.href='/viewall/<%=record._id%>/transferto/<%=customers[i]._id%>'" style="font-size: 2rem;"></i>
+    //                 <%} else {%> 
+    //                     <i class="fas fa-exchange-alt" id="disabled" style="font-size: 2rem;" ></i>
+                        
+    //                 <%}%>   
+    //             </td>
+    //         </tr>
+    //     <%}%>
+        
+    // <%}%>
+//</table> 
+
+//</div> 
+
 
 app.get("/",cacheMiddleware(30),(req,res)=> {
         res.render("home");
@@ -186,11 +229,10 @@ app.post("/viewall/:customerid/transferto/:transfercid",async(req,res)=> {
 
         let transfertocust = await Customers.findOne({_id:transfercid});
         let customer = await Customers.findOne({_id:cid});
+        let url = "/viewall/" + cid + "/transferto/" + transfercid; 
 
         if(amount > customer.currentBalance)
         {
-            let url = "/viewall/" + cid + "/transferto/" + transfercid; 
-        
             console.log("Insufficient balance for money transfer!!");
             s=1;
             res.redirect(url);
@@ -230,7 +272,8 @@ app.post("/viewall/:customerid/transferto/:transfercid",async(req,res)=> {
             console.log(Transfers);
 
             s=0;
-            res.redirect("/successfultransaction");
+            url += "/successfultransaction";
+            res.redirect(url);
         }
 });
 
@@ -239,8 +282,10 @@ app.get("/transfers",cacheMiddleware(30),async(req,res)=> {
         res.render("transferrecords",{transfers:transfers});
 });
 
-app.get("/successfultransaction",cacheMiddleware(30),(req,res)=> {
-    res.render("success");
+app.get("/viewall/:customerid/transferto/:transfercid/successfultransaction",cacheMiddleware(30),async(req,res)=> {
+    let cid = req.params.customerid;
+    let url = "/viewall/" + cid; 
+    res.render("success",{record:url});
 });
 
 app.listen(port, ()=> {

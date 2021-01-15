@@ -49,9 +49,10 @@
 </style>
 
 <div class="container">
+    <div><h2 style="text-align:center; margin: 1.4rem auto 2.8rem auto; color: rgb(167, 61, 61); font-weight: bolder;"><em>Select a Payee...</em></h2></div>
     <table>
         <tr style="background-color: rgb(240, 104, 81);">
-            <th>S.No.</th>
+        <th style="padding: 0.8rem 1.5rem;">S.No.</th>
            <th>Name</th>
            <th>Email ID</th>
            <th>Current Balance</th> 
@@ -94,7 +95,7 @@
                 <%if(i%2 == 0) {%>
                     <tr id="rows1">
                         <td style="padding: 0.8rem 1.5rem; opacity: 0.2; border-top: 7px solid blueviolet; border-bottom: 7px solid blueviolet; border-left: 7px solid blueviolet;">
-                            <%=(i+1)%>
+                            <strong><%=(i+1)%></strong>
                         </td>
                         <td style="font-weight: lighter; border-top: 7px solid blueviolet; border-bottom: 7px solid blueviolet;"><%=customers[i].name%></td>
                         <td style="font-weight: lighter; border-top: 7px solid blueviolet; border-bottom: 7px solid blueviolet;"><%=customers[i].email%></td>
@@ -107,7 +108,7 @@
                 <%}else{%>
                     <tr id="rows2">
                         <td style="padding: 0.8rem 1.5rem; opacity: 0.2; border-top: 7px solid blueviolet; border-bottom: 7px solid blueviolet; border-left: 7px solid blueviolet;">
-                            <%=(i+1)%>
+                            <strong><%=(i+1)%></strong>
                         </td>
                         <td style="font-weight: lighter; border-top: 7px solid blueviolet; border-bottom: 7px solid blueviolet;"><%=customers[i].name%></td>
                         <td style="font-weight: lighter; border-top: 7px solid blueviolet; border-bottom: 7px solid blueviolet;"><%=customers[i].email%></td>
@@ -115,7 +116,6 @@
                         <td style="font-weight: lighter; border-top: 7px solid blueviolet; border-bottom: 7px solid blueviolet; border-right: 7px solid blueviolet;">
                             <i class="fas fa-exchange-alt" style="font-size: 2rem; opacity: 0.2;"></i>
                         </td>
-                        
                     </tr>
                 <%}%>
             <%}%>

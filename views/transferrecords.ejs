@@ -8,6 +8,13 @@
     table {
         border: 2px solid black;
     }
+    #hoverrows1 {
+        background-color: rgb(243, 190, 75);
+    }
+    #hoverrows2 {
+        background-color: rgb(248, 146, 78);
+    }
+    
 </style>
 
 <div style="margin-bottom: 2.5rem;">
@@ -20,21 +27,37 @@
     </span>
 </div>
 
-<table>
-    <tr>
-        <th>S.No.</th>
-        <th>Payer</th>
-        <th>Payee</th>
-        <th>Amount transferred</th>
-        <%for(var i=0;i<transfers.length;i++) {%>
-            <tr>
-                <td><%=(i+1)%></td>
-                <td><%=transfers[i].transferredby%></td>
-                <td><%=transfers[i].transferredto%></td>
-                <td><%=transfers[i].amount%></td>
-            </tr>
-        <%}%>
-    </tr>
-</table>
+<div><h2 style="text-align:center; margin: 1.4rem auto 3.2rem auto; color: rgb(167, 61, 61); font-weight: bolder;"><em>Transfer History</em></h2></div>
+
+<%if(transfers.length) {%>
+    <table>
+        <tr style="background-color: rgb(240, 104, 81);">
+            <th style="padding: 0.8rem 1.5rem;">S.No.</th>
+            <th>Payer</th>
+            <th>Payee</th>
+            <th>Amount transferred (Rs.)</th>
+        </tr>
+        
+            <%for(var i=0;i<transfers.length;i++) {%>
+                <%if(i%2 == 0) {%>
+                    <tr id="hoverrows1">
+                        <td style="padding: 0.8rem 1.5rem;"><strong><%=(i+1)%></strong></td>
+                        <td><%=transfers[i].transferredby%></td>
+                        <td><%=transfers[i].transferredto%></td>
+                        <td><%=transfers[i].amount%></td>
+                    </tr>
+                <%}else{%>
+                    <tr id="hoverrows2">
+                        <td style="padding: 0.8rem 1.5rem;"><strong><%=(i+1)%></strong></td>
+                        <td><%=transfers[i].transferredby%></td>
+                        <td><%=transfers[i].transferredto%></td>
+                        <td><%=transfers[i].amount%></td>
+                    </tr>
+                <%}%>
+            <%}%>
+    </table>
+<%}else {%>
+    <div><h4 style="text-align: center; margin: 4rem auto; color: red;">No record found</h4></div>
+<%}%>
 
 <%- include("partials/footer") %>

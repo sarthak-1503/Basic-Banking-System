@@ -6,19 +6,12 @@
         padding: 0.8rem;
         margin-bottom: 0.5rem;
     }
-    #activebutton {
-        cursor: pointer;
-    }
-    #disabled {
-        opacity: 0.2;
-    }
     #amount {
         text-align: center;
         margin-top: 2.5rem;
     }
     #transbutton {
         margin-left: 0.5rem;
-        
     }
     #transfer:hover {
             cursor: pointer;
@@ -30,49 +23,66 @@
         padding-bottom: 0.7rem; 
         padding-top: 0.7rem;
     }
+    #hoverrows1 {
+        background-color: rgb(243, 190, 75)
+    }
+    #hoverrows2 {
+        background-color: rgb(248, 146, 78);
+    }
+    
 </style>
 <span class="icons">
     <i class="fa fa-arrow-left" id="back" aria-hidden="true" style="font-size: 1.5rem; margin-top: 1%;" onclick="window.location.href='/viewall/<%=record._id%>'" title="Go back"></i>
 </span>
 
-<div>
-    <div>
-        <table>
-            <tr>
-               <th>Name</th>
-               <th>Email ID</th>
-               <th>Current Balance</th> 
-               <th style="color: rgb(230, 152, 64);"></th>
-            </tr>
-            <% for(var i=0;i<10;i++) {%>
-        
-                <%let cid = JSON.stringify(customers[i]._id) %>
-                <%let rid = JSON.stringify(record._id) %>
-                
-                <tr>
-                    <%if(cid.localeCompare(rid)) {%>
-        
-                        <td><%=customers[i].name%></td>
-                        <td><%=customers[i].email%></td>
-                        <td><%=customers[i].currentBalance%></td>
-                        <td>
-                            <%if(JSON.stringify(transfercust._id).localeCompare(JSON.stringify(customers[i]._id))) {%>
-                                <i class="fas fa-exchange-alt" id="transfer" onclick="window.location.href='/viewall/<%=record._id%>/transferto/<%=customers[i]._id%>'" style="font-size: 2rem;"></i>
-                            <%} else {%> 
-                                <i class="fas fa-exchange-alt" id="disabled" style="font-size: 2rem;" ></i>
-                                
-                            <%}%>   
-                        </td>
-                    <%}%>
-                </tr>
-            <%}%>
-        </table>
-        
-    </div>
+<div class="container">
+    <div><h2 style="text-align:center; margin: 1.4rem auto 4rem auto; color: rgb(167, 61, 61); font-weight: bolder;"><em>Enter the Amount to be transferred...</em></h2></div>
+    <table style="border: 2px solid black;">
+        <tr style="background-color: rgb(240, 104, 81);">
+            <th style="padding: 0.8rem 1.5rem;">
+                <strong>Type of Customer</strong>
+            </th>
+            <th>
+                <strong>Customer Name</strong>
+            </th>
+            <th>
+                <strong>Email ID</strong>
+            </th>
+            <th>
+                <strong>Current Balance (Rs.)</strong>
+            </th>
+        </tr>
+        <tr id="hoverrows1" >
+            <td style="padding: 0.8rem 1.5rem;">
+                <strong>Payer</strong>
+            </td>
+            <td>
+                <%=record.name%>
+            </td>
+            <td>
+                <%=record.email%>
+            </td>
+            <td>
+                <%=record.currentBalance%>
+            </td>
+        </tr>
+        <tr id="hoverrows2" >
+            <td style="padding: 0.8rem 1.5rem;">
+                <strong>Payee</strong>
+            </td>
+            <td>
+                <%=transfercust.name%>
+            </td>
+            <td>
+                <%=transfercust.email%>
+            </td>
+            <td>
+                <%=transfercust.currentBalance%>
+            </td>
+        </tr>
+    </table>
 
-    
-    
-    <div id="amount">
+    <div style="margin: 7rem" id="amount">
         <div style="margin: 0.5rem">
             <%if(s==1) {%>
                 <div style="text-align: center; margin-top: 1rem;">
@@ -82,8 +92,9 @@
                 <%}%>
         </div>
         <form action="/viewall/<%=record._id%>/transferto/<%=transfercust._id%>" method="POST">
-            <input type="number" name="amount" placeholder="Amount" style="width: 15%; height: 30%;" required>
-            <button class="btn btn-sm btn-primary" id="transbutton" style="font-size: 0.9rem;">Transfer!</button>
+            <i style="font-size: 1.6rem; margin-right: 1rem; color: rgb(42, 122, 42);" class="fa fa-inr" aria-hidden="true"></i>
+            <input style="margin-right: 1rem; width:36%;" type="number" name="amount" placeholder="Amount" required>
+            <button class="btn btn-sm btn-primary" id="transbutton" style="font-size: 1rem;">Transfer</button>
         </form>
     </div>
 </div>
