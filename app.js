@@ -142,12 +142,12 @@ app.post("/viewall/:customerid/transferto/:transfercid",async(req,res)=> {
         {
             let transfernetamount = parseInt(transfertocust.currentBalance) + parseInt(amount);
             
-            let payeeAmount = await transfertocust.updateOne({},{$set : {currentBalance: transfernetamount}});
+            let payeeAmount = await transfertocust.updateOne({$set : {currentBalance: transfernetamount}});
 
             let customchange = parseInt(customer.currentBalance) - parseInt(amount);
             //console.log(typeof transfertocust.currentBalance, typeof customchange, amount);
 
-            let payerAmount = await customer.updateOne({},{$set : {currentBalance: customchange}});
+            let payerAmount = await customer.updateOne({$set : {currentBalance: customchange}});
 
             let transferrecords = {
                 transferredby: customer.name,
