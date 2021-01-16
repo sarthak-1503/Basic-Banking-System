@@ -142,12 +142,21 @@ app.post("/viewall/:customerid/transferto/:transfercid",async(req,res)=> {
         {
             let transfernetamount = parseInt(transfertocust.currentBalance) + parseInt(amount);
             
-            let payeeAmount = await transfertocust.updateOne({$set : {currentBalance: transfernetamount}});
+            transfertocust.updateOne({$set : {currentBalance: transfernetamount}},(err,record)=> {
+                if(err)
+                    console.log(err);
+                else
+                    console.log("Updated!!");
+            });
 
             let customchange = parseInt(customer.currentBalance) - parseInt(amount);
-            //console.log(typeof transfertocust.currentBalance, typeof customchange, amount);
-
-            let payerAmount = await customer.updateOne({$set : {currentBalance: customchange}});
+            console.log(typeof transfertocust.currentBalance, typeof customchange, amount);
+            customer.updateOne({$set : {currentBalance: customchange}},(err,record)=> {
+                if(err)
+                    console.log(err);
+                else
+                    console.log("Updated this also!!");
+            });
 
             let transferrecords = {
                 transferredby: customer.name,
@@ -161,7 +170,7 @@ app.post("/viewall/:customerid/transferto/:transfercid",async(req,res)=> {
                 else
                     console.log("Record stored!!");
             });
-            //console.log(Transfers);
+            console.log(Transfers);
 
             s=0;
             url += "/successfultransaction";
