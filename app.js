@@ -39,7 +39,6 @@ const sessionConfig = {
 
 app.use(session(sessionConfig));
 
-
 const port = process.env.PORT || 3000;
 app.set("port",port);
 
