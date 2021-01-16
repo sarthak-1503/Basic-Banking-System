@@ -29,8 +29,8 @@
     #hoverrows2 {
         background-color: rgb(248, 146, 78);
     }
-    
 </style>
+
 <span class="icons">
     <i class="fa fa-arrow-left" id="back" aria-hidden="true" style="font-size: 1.5rem; margin-top: 1%;" onclick="window.location.href='/viewall/<%=record._id%>'" title="Go back"></i>
 </span>
@@ -82,15 +82,17 @@
         </tr>
     </table>
 
-    <div style="margin: 7rem" id="amount">
-        <div style="margin: 0.5rem">
-            <%if(s==1) {%>
-                <div style="text-align: center; margin-top: 1rem;">
-                    <strong><p style="color: rgb(230, 64, 64);">Amount insufficient!! <span style="color: green;">Enter amount <= Rs. <%=record.currentBalance%></span> </p></strong>
-                    <%s=0;%>
-                </div>
-                <%}%>
-        </div>
+    <div style="margin: 6rem" id="amount">
+        
+            <div style="text-align: center; margin: 0 auto 2.2rem auto;">
+                <strong><p style="font-size:1.25rem; color: rgb(230, 64, 64);">
+                    <%if(s == 1) {%>
+                        Amount insufficient!!  <span style="color: green;">Enter amount <= Rs. <%=record.currentBalance%>
+                        <%s=0;%>
+                    <%}%>
+                </span> </p></strong>
+            </div>
+
         <form action="/viewall/<%=record._id%>/transferto/<%=transfercust._id%>" method="POST">
             <i style="font-size: 1.6rem; margin-right: 1rem; color: rgb(42, 122, 42);" class="fa fa-inr" aria-hidden="true"></i>
             <input style="margin-right: 1rem; width:36%;" type="number" name="amount" placeholder="Amount" required>
@@ -98,5 +100,7 @@
         </form>
     </div>
 </div>
+
+
 
 <%- include("partials/footer") %>

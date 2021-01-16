@@ -110,7 +110,7 @@ app.get("/viewall/:customerid/transferto",cacheMiddleware(30),async(req,res)=> {
     res.render("transfertocustomers",{record:record,customers:customers});
 });
 let s = 0;
-app.get("/viewall/:customerid/transferto/:transfercid",cacheMiddleware(30),async(req,res)=> {
+app.get("/viewall/:customerid/transferto/:transfercid",async(req,res)=> {
     
         let cid = req.params.customerid;
         let transfercid = req.params.transfercid;
