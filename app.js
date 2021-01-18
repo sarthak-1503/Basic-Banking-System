@@ -91,7 +91,6 @@ app.get("/viewall",async(req,res)=> {
         let record = await Customers.find({});
         res.render("viewall",{customers:record});
 });
-// cacheMiddleware(30)
 
 app.get("/viewall/:customerid",cacheMiddleware(30),async(req,res)=> {
         let cid = req.params.customerid;
@@ -186,7 +185,6 @@ app.get("/transfers",async(req,res)=> {
         let transfers = await Transfers.find({});
         res.render("transferrecords",{transfers:transfers});
 });
-// cacheMiddleware(30)
 
 app.get("/viewall/:customerid/transferto/:transfercid/successfultransaction",cacheMiddleware(30),async(req,res)=> {
     let cid = req.params.customerid;
