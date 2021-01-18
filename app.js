@@ -87,11 +87,11 @@ app.get("/",cacheMiddleware(30),(req,res)=> {
         res.render("home");
 });
 
-app.get("/viewall",cacheMiddleware(30),async(req,res)=> {
+app.get("/viewall",async(req,res)=> {
         let record = await Customers.find({});
         res.render("viewall",{customers:record});
-
 });
+// cacheMiddleware(30)
 
 app.get("/viewall/:customerid",cacheMiddleware(30),async(req,res)=> {
         let cid = req.params.customerid;
@@ -182,10 +182,11 @@ app.post("/viewall/:customerid/transferto/:transfercid",async(req,res)=> {
         }
 });
 
-app.get("/transfers",cacheMiddleware(30),async(req,res)=> {
+app.get("/transfers",async(req,res)=> {
         let transfers = await Transfers.find({});
         res.render("transferrecords",{transfers:transfers});
 });
+// cacheMiddleware(30)
 
 app.get("/viewall/:customerid/transferto/:transfercid/successfultransaction",cacheMiddleware(30),async(req,res)=> {
     let cid = req.params.customerid;
