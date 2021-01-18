@@ -87,10 +87,13 @@
             <div style="text-align: center; margin: 0 auto 2.2rem auto;">
                 <strong><p style="font-size:1.25rem; color: rgb(230, 64, 64);">
                     <%if(s == 1) {%>
-                        Amount insufficient!!  <span style="color: green;">Enter amount <= Rs. <%=record.currentBalance%>
+                        Amount insufficient!!  <span style="color: green;">Enter amount <= Rs. <%=record.currentBalance%></span>
+                        <%s=0;%>
+                    <%}else if(s == -1) {%>
+                        Enter a valid amount!!  
                         <%s=0;%>
                     <%}%>
-                </span> </p></strong>
+                </p></strong>
             </div>
 
         <form action="/viewall/<%=record._id%>/transferto/<%=transfercust._id%>" method="POST">

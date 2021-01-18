@@ -137,6 +137,11 @@ app.post("/viewall/:customerid/transferto/:transfercid",async(req,res)=> {
             s=1;
             res.redirect(url);
         }
+        else if(amount <= 0)
+        {
+            s = -1;
+            res.redirect(url);
+        }
         else
         {
             let transfernetamount = parseInt(transfertocust.currentBalance) + parseInt(amount);
