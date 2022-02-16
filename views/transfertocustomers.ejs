@@ -11,10 +11,10 @@
         text-align: center;
     }
     #transfer:hover {
-            cursor: pointer;
-            font-size: 10rem;
-            color: #1A73E8;
-            opacity:0.6;
+        cursor: pointer;
+        font-size: 10rem;
+        color: #1A73E8;
+        opacity:0.6;
     }
     #hoverrows1 {
         background-color: rgb(243, 190, 75);
@@ -24,18 +24,12 @@
     }
     #hoverrows1:hover {
         background-color: rgb(209, 149, 236);
-        /* text-shadow: -0.5rem 0.5rem red; */
-        /* text-transform: uppercase; */
-        /* table-layout: fixed; */
         font-size: 1rem;
         color: blue;
         font-weight: bold;
     } 
     #hoverrows2:hover {
         background-color: rgb(209, 149, 236);
-        /* text-shadow: -0.5rem 0.5rem red; */
-        /* text-transform: uppercase; */
-        /* table-layout: fixed; */
         font-size: 1rem;
         color: blue;
         font-weight: bold;
@@ -46,17 +40,32 @@
     #rows2 {
         background-color: rgb(248, 146, 78);
     }
+    .cell-component {
+        font-weight: lighter !important;
+    }
 </style>
 
-<div class="container">
-    <div><h2 style="text-align:center; margin: 1.4rem auto 2.8rem auto; color: rgb(167, 61, 61); font-weight: bolder;"><em>Select a Payee...</em></h2></div>
-    <table>
-        <tr style="background-color: rgb(240, 104, 81);">
-        <th style="padding: 0.8rem 1.5rem;">S.No.</th>
-           <th>Name</th>
-           <th>Email ID</th>
-           <th>Current Balance</th> 
-           <th></th>
+<div class="container w-75 mx-auto">
+    <div>
+        <h2 style="text-align:center; margin: 1.4rem auto 2.8rem auto; color: rgb(167, 61, 61); font-weight: bolder;">
+            <em>Select a Payee...</em>
+        </h2>
+    </div>
+    <table class="table w-100 mx-auto" style="border: 2px solid black;">
+        <tr class="sno" style="background-color: rgb(240, 104, 81); ">
+            <th scope="col" style="padding: 0.8rem 1.5rem;">
+                <strong>S.No.</strong>
+            </th>
+            <th scope="col">
+                <strong>Customer Name</strong>
+            </th>
+            <th scope="col">
+                <strong>Email ID</strong>
+            </th>
+            <th scope="col">
+                <strong>Current Balance (Rs.)</strong>
+            </th>
+            <th></th>
         </tr>
         <% for(var i=0;i<10;i++) {%>
     
@@ -65,56 +74,77 @@
     
             <%if(cid.localeCompare(rid)) {%>
                <%if(i%2 == 0) {%>
-                    <tr id="hoverrows1">
-                        <td style="padding: 0.8rem 1.5rem;">
+                    <tr id="hoverrows1" >
+                        <th scope="row" style="padding: 0.8rem 1.5rem;">
                             <strong><%=(i+1)%></strong>
-                        </td>
-                        <td><%=customers[i].name%></td>
-                        <td><%=customers[i].email%></td>
-                        <td><%=customers[i].currentBalance%></td>
+                        </th>
                         <td>
-                            <i class="fas fa-exchange-alt" onclick="window.location.href='/viewall/<%=record._id%>/transferto/<%=customers[i]._id%>'" id="transfer" style="font-size: 2rem;"></i>
+                            <%=customers[i].name%>
                         </td>
-                        
+                        <td>
+                            <%=customers[i].email%>
+                        </td>
+                        <td>
+                            <%=customers[i].currentBalance%>
+                        </td>
+                        <td>
+                            <i class="fa-solid fa-right-left" onclick="window.location.href='/viewall/<%=record._id%>/transferto/<%=customers[i]._id%>'" style="font-size: 2rem;" id="transfer"></i>
+                        </td>
                     </tr>
                 <%}else{%>
-                    <tr id="hoverrows2">
-                        <td style="padding: 0.8rem 1.5rem;">
+                    <tr id="hoverrows2" >
+                        <th scope="row" style="padding: 0.8rem 1.5rem;">
                             <strong><%=(i+1)%></strong>
-                        </td>
-                        <td><%=customers[i].name%></td>
-                        <td><%=customers[i].email%></td>
-                        <td><%=customers[i].currentBalance%></td>
+                        </th>
                         <td>
-                            <i class="fas fa-exchange-alt" onclick="window.location.href='/viewall/<%=record._id%>/transferto/<%=customers[i]._id%>'" id="transfer" style="font-size: 2rem;"></i>
+                            <%=customers[i].name%>
                         </td>
-                        
+                        <td>
+                            <%=customers[i].email%>
+                        </td>
+                        <td>
+                            <%=customers[i].currentBalance%>
+                        </td>
+                        <td>
+                            <i class="fa-solid fa-right-left" onclick="window.location.href='/viewall/<%=record._id%>/transferto/<%=customers[i]._id%>'" style="font-size: 2rem;" id="transfer"></i>
+                        </td>
                     </tr>
                 <%}%>
             <%}else{%>
                 <%if(i%2 == 0) {%>
-                    <tr id="rows1">
-                        <td style="padding: 0.8rem 1.5rem; opacity: 0.2; border-top: 7px solid blueviolet; border-bottom: 7px solid blueviolet; border-left: 7px solid blueviolet;">
+                    <tr id="rows1" style="border: 7px solid blueviolet;" >
+                        <th scope="row" style="padding: 0.8rem 1.5rem;">
                             <strong><%=(i+1)%></strong>
+                        </th>
+                        <td class="cell-component">
+                            <%=customers[i].name%>
                         </td>
-                        <td style="font-weight: lighter; border-top: 7px solid blueviolet; border-bottom: 7px solid blueviolet;"><%=customers[i].name%></td>
-                        <td style="font-weight: lighter; border-top: 7px solid blueviolet; border-bottom: 7px solid blueviolet;"><%=customers[i].email%></td>
-                        <td style="font-weight: lighter; border-top: 7px solid blueviolet; border-bottom: 7px solid blueviolet;"><%=customers[i].currentBalance%></td>
-                        <td style="font-weight: lighter; border-top: 7px solid blueviolet; border-bottom: 7px solid blueviolet; border-right: 7px solid blueviolet;">
-                            <i class="fas fa-exchange-alt" style="font-size: 2rem; opacity: 0.2;"></i>
+                        <td class="cell-component">
+                            <%=customers[i].email%>
                         </td>
-                        
+                        <td class="cell-component">
+                            <%=customers[i].currentBalance%>
+                        </td>
+                        <td class="cell-component">
+                            <i class="fa-solid fa-right-left" style="font-size: 2rem; opacity: 0.2;" ></i>
+                        </td>
                     </tr>
                 <%}else{%>
-                    <tr id="rows2">
-                        <td style="padding: 0.8rem 1.5rem; opacity: 0.2; border-top: 7px solid blueviolet; border-bottom: 7px solid blueviolet; border-left: 7px solid blueviolet;">
+                    <tr id="rows2" style="border: 7px solid blueviolet;" >
+                        <th scope="row" style="padding: 0.8rem 1.5rem;">
                             <strong><%=(i+1)%></strong>
+                        </th>
+                        <td class="cell-component">
+                            <%=customers[i].name%>
                         </td>
-                        <td style="font-weight: lighter; border-top: 7px solid blueviolet; border-bottom: 7px solid blueviolet;"><%=customers[i].name%></td>
-                        <td style="font-weight: lighter; border-top: 7px solid blueviolet; border-bottom: 7px solid blueviolet;"><%=customers[i].email%></td>
-                        <td style="font-weight: lighter; border-top: 7px solid blueviolet; border-bottom: 7px solid blueviolet;"><%=customers[i].currentBalance%></td>
-                        <td style="font-weight: lighter; border-top: 7px solid blueviolet; border-bottom: 7px solid blueviolet; border-right: 7px solid blueviolet;">
-                            <i class="fas fa-exchange-alt" style="font-size: 2rem; opacity: 0.2;"></i>
+                        <td class="cell-component">
+                            <%=customers[i].email%>
+                        </td>
+                        <td class="cell-component">
+                            <%=customers[i].currentBalance%>
+                        </td>
+                        <td class="cell-component">
+                            <i class="fa-solid fa-right-left" style="font-size: 2rem; opacity: 0.2;" ></i>
                         </td>
                     </tr>
                 <%}%>

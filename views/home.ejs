@@ -1,25 +1,26 @@
 <%- include("partials/header") %>
 
 <style>
-    .icons {
-        margin: 5.1rem;
-    }
-    .icons:hover {
+    
+    .fa-solid:hover {
         cursor: pointer;
         color: rgb(82, 82, 224);
     }
+
+    .container {
+        margin: 12rem auto !important;
+    }
 </style>
 
-<div class="container" style="align-self: center; text-align: center;">
-    <div style="margin: 10rem auto 1.5rem auto;">
-        <span class="icons">
-            <i class="fa fa-users 10x"  aria-hidden="true" style="font-size: 13rem;" onclick="window.location.href='/viewall'" class="icon" title="View All Customers"></i>
-        </span>
-        <span class="icons">
-            <i class="fas fa-history" aria-hidden="true" style="font-size: 13rem;" onclick="window.location.href='/transfers'" class="icon" title="View Transfer Records"></i>
-            <!-- <i class="fa fa-exchange" aria-hidden="true" style="font-size: 13rem;" onclick="window.location.href='/transfers'" class="icon" title="View Transfer Records"></i> -->
-        </span>
-    </div>
+    <div class="container w-75 mx-auto my-5">
+        <div class="row w-100 mx-auto my-4">
+            <div class="col w-100 mx-auto my-3">
+                <i class="fa-solid fa-users" style="font-size: 10rem;" onclick="window.location.href='/viewall'"></i>
+            </div>
+            <div class="col w-100 mx-auto my-3">
+                <i class="fa-solid fa-clock-rotate-left" style="font-size: 10rem" onclick="window.location.href='/transfers'"></i>
+            </div>
+        </div>
 </div>
 
 <%- include("partials/footer") %>

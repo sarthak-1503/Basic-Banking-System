@@ -14,18 +14,12 @@
     }
     #hoverrows1:hover {
         background-color: rgb(209, 149, 236);
-        /* text-shadow: -0.5rem 0.5rem red; */
-        /* text-transform: uppercase; */
-        /* table-layout: fixed; */
         font-size: 1rem;
         color: blue;
         font-weight: bold;
     } 
     #hoverrows2:hover {
         background-color: rgb(209, 149, 236);
-        /* text-shadow: -0.5rem 0.5rem red; */
-        /* text-transform: uppercase; */
-        /* table-layout: fixed; */
         font-size: 1rem;
         color: blue;
         font-weight: bold;
@@ -40,31 +34,34 @@
     
 </style>
 
-<div>
-    <span class="icons">
+<div class="container text-left mr-auto my-3 row" style="width: 10%;">
+    <div class="col">
         <i class="fa fa-arrow-left" id="back" aria-hidden="true" style="font-size: 1.5rem; margin-top: 1%;" onclick="window.location.href='/'" title="Go back"></i>
-    </span>
+    </div>
     
-     <span class="icons">
+     <div class="col">
         <i class="fas fa-history" aria-hidden="true" id="back" style="font-size: 1.5rem; margin-top: 1%;" onclick="window.location.href='/transfers'" title="View Transfer History"></i>
-        <!-- <i class="fa fa-exchange" aria-hidden="true" id="back" style="font-size: 1.5rem; margin-top: 1%;" onclick="window.location.href='/transfers'" title="View Transfer History"></i> -->
-     </span>
+     </div>
 </div>
 
-<div class="container">
-    <div><h2 style="text-align:center; margin: 1.4rem auto 2.8rem auto; color: rgb(167, 61, 61); font-weight: bolder;"><em>Select a Payer...</em></h2></div>
-    <table style="border: 2px solid black;">
-        <tr style="background-color: rgb(240, 104, 81);">
-            <th style="padding: 0.8rem 1.5rem;">
+<div class="container w-75 mx-auto">
+    <div>
+        <h2 style="text-align:center; margin: 1.4rem auto 2.8rem auto; color: rgb(167, 61, 61); font-weight: bolder;">
+            <em>Select a Payer...</em>
+        </h2>
+    </div>
+    <table class="table w-100 mx-auto" style="border: 2px solid black;">
+        <tr class="sno" style="background-color: rgb(240, 104, 81); ">
+            <th scope="col" style="padding: 0.8rem 1.5rem;">
                 <strong>S.No.</strong>
             </th>
-            <th>
+            <th scope="col">
                 <strong>Customer Name</strong>
             </th>
-            <th>
+            <th scope="col">
                 <strong>Email ID</strong>
             </th>
-            <th>
+            <th scope="col">
                 <strong>Current Balance (Rs.)</strong>
             </th>
             <th></th>
@@ -73,9 +70,9 @@
         <%for(i=0;i<customers.length;i++) {%>
             <%if(i%2 == 0) {%>
                 <tr id="hoverrows1" >
-                    <td style="padding: 0.8rem 1.5rem;">
+                    <th scope="row" style="padding: 0.8rem 1.5rem;">
                         <strong><%=(i+1)%></strong>
-                    </td>
+                    </th>
                     <td>
                         <%=customers[i].name%>
                     </td>
@@ -91,9 +88,9 @@
                 </tr>
             <%}else{%>
                 <tr id="hoverrows2" >
-                    <td style="padding: 0.8rem 1.5rem;">
+                    <th scope="row" style="padding: 0.8rem 1.5rem;">
                         <strong><%=(i+1)%></strong>
-                    </td>
+                    </th>
                     <td>
                         <%=customers[i].name%>
                     </td>

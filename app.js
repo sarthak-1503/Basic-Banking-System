@@ -15,9 +15,11 @@ let MongoStore = require("connect-mongo")(session);
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true})); 
 app.use(favicon('./public/images/favicon.ico'));
+app.use(express.static('public'))
 
 const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/bbsdb";
 const secret = process.env.SECRET || "keepthisasasecret";
+const port = process.env.PORT || 3000;
 
 const store = new MongoStore({
     url: dbUrl,
@@ -38,8 +40,6 @@ const sessionConfig = {
 };
 
 app.use(session(sessionConfig));
-
-const port = process.env.PORT || 3000;
 app.set("port",port);
 
 mongoose.connect(dbUrl, {
@@ -82,6 +82,63 @@ let transferSchema = new mongoose.Schema({
 
 let Customers = mongoose.model("Customers",customerSchema);
 let Transfers = mongoose.model("Transfers",transferSchema);
+
+// Customers.deleteMany({}).catch(err => {
+//     console.log(err)
+// })
+
+// Customers.insertMany([
+//     {
+//         name: 'Sarthak',
+//         email: 'sarthak@gmail.com',
+//         currentBalance: '5000'
+//     },
+//     {
+//         name: 'Japnit',
+//         email: 'japnit@gmail.com',
+//         currentBalance: '5000'
+//     },
+//     {
+//         name: 'Saurabh',
+//         email: 'saurabh@gmail.com',
+//         currentBalance: '5000'
+//     },
+//     {
+//         name: 'Akshita',
+//         email: 'akshita@gmail.com',
+//         currentBalance: '5000'
+//     },
+//     {
+//         name: 'Utkarsh',
+//         email: 'utkarsh@gmail.com',
+//         currentBalance: '5000'
+//     },
+//     {
+//         name: 'Sambhav',
+//         email: 'sambhav@gmail.com',
+//         currentBalance: '5000'
+//     },
+//     {
+//         name: 'Abhinav',
+//         email: 'abhinav@gmail.com',
+//         currentBalance: '5000'
+//     },
+//     {
+//         name: 'Tushar',
+//         email: 'tushar@gmail.com',
+//         currentBalance: '5000'
+//     },
+//     {
+//         name: 'Mishika',
+//         email: 'mishika@gmail.com',
+//         currentBalance: '5000'
+//     },
+//     {
+//         name: 'Mohit',
+//         email: 'mohit@gmail.com',
+//         currentBalance: '5000'
+//     }
+// ]);
 
 app.get("/",cacheMiddleware(30),(req,res)=> {
         res.render("home");
@@ -166,6 +223,16 @@ app.post("/viewall/:customerid/transferto/:transfercid",async(req,res)=> {
                 transferredto: transfertocust.name,
                 amount: parseInt(amount)
             };
+
+            let transferRecords = await Transfers.find({}).catch(err => {
+                console.log(err);
+            })
+
+            if(transferRecords.length >= 50) {
+                Transfers.deleteMany({}).catch(err => {
+                    console.log(err);
+                })
+            }
 
             Transfers.insertMany(transferrecords,(err,record)=> {
                 if(err)

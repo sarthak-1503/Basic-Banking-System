@@ -6,103 +6,111 @@
         padding: 0.8rem;
         margin-bottom: 0.5rem;
     }
-    #amount {
-        text-align: center;
-        margin-top: 2.5rem;
-    }
-    #transbutton {
-        margin-left: 0.5rem;
-    }
-    #transfer:hover {
-            cursor: pointer;
-            font-size: 10rem;
-            color: #1A73E8;
-            opacity:0.6;
-    }
     td{
         padding-bottom: 0.7rem; 
         padding-top: 0.7rem;
     }
-    #hoverrows1 {
-        background-color: rgb(243, 190, 75)
-    }
-    #hoverrows2 {
-        background-color: rgb(248, 146, 78);
-    }
 </style>
+
 
 <span class="icons">
     <i class="fa fa-arrow-left" id="back" aria-hidden="true" style="font-size: 1.5rem; margin-top: 1%;" onclick="window.location.href='/viewall/<%=record._id%>'" title="Go back"></i>
 </span>
 
-<div class="container">
-    <div><h2 style="text-align:center; margin: 1.4rem auto 4rem auto; color: rgb(167, 61, 61); font-weight: bolder;"><em>Enter the Amount to be transferred...</em></h2></div>
-    <table style="border: 2px solid black;">
-        <tr style="background-color: rgb(240, 104, 81);">
-            <th style="padding: 0.8rem 1.5rem;">
-                <strong>Type of Customer</strong>
-            </th>
-            <th>
-                <strong>Customer Name</strong>
-            </th>
-            <th>
-                <strong>Email ID</strong>
-            </th>
-            <th>
-                <strong>Current Balance (Rs.)</strong>
-            </th>
-        </tr>
-        <tr id="hoverrows1" >
-            <td style="padding: 0.8rem 1.5rem;">
-                <strong>Payer</strong>
-            </td>
-            <td>
-                <%=record.name%>
-            </td>
-            <td>
-                <%=record.email%>
-            </td>
-            <td>
-                <%=record.currentBalance%>
-            </td>
-        </tr>
-        <tr id="hoverrows2" >
-            <td style="padding: 0.8rem 1.5rem;">
-                <strong>Payee</strong>
-            </td>
-            <td>
-                <%=transfercust.name%>
-            </td>
-            <td>
-                <%=transfercust.email%>
-            </td>
-            <td>
-                <%=transfercust.currentBalance%>
-            </td>
-        </tr>
-    </table>
 
-    <div style="margin: 6rem" id="amount">
+    <div class="container w-75 mx-auto my-4">
+        <div class="w-100 mx-auto">
+            <h2 style="color: rgb(167, 61, 61); font-weight: bolder;">
+                <em>Enter the Amount to be transferred...</em>
+            </h2>
+        </div>
+
+        <div class="text-center w-75 mx-auto my-5">
+            <table class="table mx-auto w-100">
+                <tr style="background-color: rgb(240, 104, 81);">
+                    <th scope="col">
+                        <strong>Type of Customer</strong>
+                    </th>
+                    <th scope="col">
+                        <strong>Customer Name</strong>
+                    </th>
+                    <th scope="col">
+                        <strong>Email ID</strong>
+                    </th>
+                    <th scope="col">
+                        <strong>Current Balance (Rs.)</strong>
+                    </th>
+                </tr>
+                <tr  style="background-color: rgb(243, 190, 75) ;">
+                    <th scope="row">
+                        <strong>Payer</strong>
+                    </th>
+                    <td>
+                        <%=record.name%>
+                    </td>
+                    <td>
+                        <%=record.email%>
+                    </td>
+                    <td>
+                        <%=record.currentBalance%>
+                    </td>
+                </tr>
+                <tr style="background-color: rgb(248, 146, 78) !important;">
+                    <th scope="row">
+                        <strong>Payee</strong>
+                    </th>
+                    <td>
+                        <%=transfercust.name%>
+                    </td>
+                    <td>
+                        <%=transfercust.email%>
+                    </td>
+                    <td>
+                        <%=transfercust.currentBalance%>
+                    </td>
+                </tr>
+            </table>
+        </div>
         
-            <div style="text-align: center; margin: 0 auto 2.2rem auto;">
-                <strong><p style="font-size:1.25rem; color: rgb(230, 64, 64);">
-                    <%if(s == 1) {%>
-                        Amount insufficient!!  <span style="color: green;">Enter amount <= Rs. <%=record.currentBalance%></span>
-                        <%s=0;%>
-                    <%}else if(s == -1) {%>
-                        Enter a valid amount!!  
-                        <%s=0;%>
-                    <%}%>
-                </p></strong>
+            <div style="margin: 6rem" id="amount">
+                
+                    <div style="text-align: center; margin: 0 auto 2.2rem auto;">
+                        <strong><p style="font-size:1.25rem; color: rgb(230, 64, 64);">
+                            <%if(s == 1) {%>
+                                Amount insufficient!!  <span style="color: green;">Enter amount <= Rs. <%=record.currentBalance%></span>
+                                <%s=0;%>
+                            <%}else if(s == -1) {%>
+                                Enter a valid amount!!  
+                                <%s=0;%>
+                            <%}%>
+                        </p></strong>
+                    </div>
+        
+                <div class="w-100 mx-auto my-4">
+                    <form action="/viewall/<%=record._id%>/transferto/<%=transfercust._id%>" method="POST">
+                        <div class="form-group mx-auto text-center w-75">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i style="font-size: 1.6rem; color: rgb(42, 122, 42);" class="fa fa-inr my-2 mx-3" aria-hidden="true"></i>
+                                </div>
+                                <input style="width:30% !important; padding: 0.5rem;" class="form-control" type="number" name="amount" placeholder="Amount" required>
+                            </div>
+                            <!-- <div class="w-75 mx-auto">
+                                
+                            </div> -->
+                            <div class="w-75 mx-auto my-4">
+                                <button class="btn btn-lg btn-primary mx-auto" id="transfer" onclick="window.location.href='/viewall/<%=record._id%>/transferto'">Transfer</button>
+                            </div>
+                        </div>
+                        
+                    </form>
+                </div>
             </div>
-
-        <form action="/viewall/<%=record._id%>/transferto/<%=transfercust._id%>" method="POST">
-            <i style="font-size: 1.6rem; margin-right: 1rem; color: rgb(42, 122, 42);" class="fa fa-inr" aria-hidden="true"></i>
-            <input style="margin-right: 1rem; width:36%;" type="number" name="amount" placeholder="Amount" required>
-            <button class="btn btn-sm btn-primary" id="transbutton" style="font-size: 1rem;">Transfer</button>
-        </form>
+        </div>
     </div>
-</div>
+    
+   
+
 
 
 

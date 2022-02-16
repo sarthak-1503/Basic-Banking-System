@@ -5,64 +5,54 @@
 </span>
 
 <style>
-    #record {
-        margin-top: 2rem;
-        margin-bottom: 3rem;
-    }
-    #transferbutton {
-        outline: none;
-        border: 0;
-        border-radius: 0.4rem;
-    }
-    #transferbutton:hover {
+    
+    #transfer:hover {
         border: 2px solid #007bff;
         font-size: 1.2rem;
         background-color: white !important;
         color: #007bff;
         font-weight: bold;
-    }
+    } 
     th {
-            padding: 1rem 5rem;
-            border-right: 2px solid rgb(117, 113, 113);
-            border-bottom:0.5px solid rgb(228, 228, 228) ;
-            padding-right: 2.5rem;
-            padding-left: 2.5rem;
-            background-color: rgb(243, 134, 95);
+        border-right: 0.5px solid rgb(117, 113, 113);
+        border-left: 2px solid rgb(117, 113, 113);
+        border-bottom:0.5px solid rgb(117, 113, 113) ;
     }
+
     td {
-        padding-right: 10rem;
-        padding-left: 10rem;
-        background-color: rgb(143, 179, 245);
-        font-weight: 700;
+        border-right: 2px solid rgb(117, 113, 113);
+        border-bottom: 0.5px solid rgb(117, 113, 113);
     }
 </style>
 
-<div style="text-align: center; margin: 3rem; ">
-    <h2 style="color: rgb(167, 61, 61); font-weight: bolder;">
-        <em>Customer Details</em>
-    </h2>
-</div>
-
-<div id="record">
-    <table>
-        <tr>
-            <th>Name</th>
-            <td><%=record.name%></td>
-        </tr>
-        <tr>
-            <th>Email ID</th>
-            <td><%=record.email%></td>
-        </tr>
-        <tr>
-            <th>Current Balance</th>
-            <td>Rs. <%=record.currentBalance%></td>
-        </tr>
-    </table>
+<div class="container w-75 mx-auto my-5">
+    <div class="heading w-100 mx-auto text-center">
+        <h2 class="mx-auto">
+            <em>Customer Details</em>
+        </h2>
+    </div>
     
-</div>
-
-<div style="text-align: center; margin-top: 6rem;">
-    <button id="transferbutton" class="btn btn-lg btn-primary"  onclick="window.location.href='/viewall/<%=record._id%>/transferto'">Transfer Money</button>
+    <div class="container w-50 mx-auto my-5">
+        <table class="table w-100">
+            <tr class="text-center" style="border-top: 2px solid rgb(117, 113, 113);">
+                <th scope="row" style="background-color: rgb(243, 134, 95);">Name</th>
+                <td style="background-color: rgb(90, 176, 187);"><%=record.name%></td>
+            </tr>
+            <tr class="text-center">
+                <th scope="row" style="background-color: rgb(243, 134, 95);">Email ID</th>
+                <td style="background-color: rgb(90, 176, 187);"><%=record.email%></td>
+            </tr>
+            <tr class="text-center" style="border-bottom: 2px solid rgb(117, 113, 113); ">
+                <th scope="row" style="background-color: rgb(243, 134, 95);">Current Balance</th>
+                <td style="background-color: rgb(90, 176, 187);">Rs. <%=record.currentBalance%></td>
+            </tr>
+        </table>
+        
+    </div>
+    
+    <div class="text-center mx-auto my-4">
+        <button class="btn btn-lg btn-primary mx-auto" id="transfer"  onclick="window.location.href='/viewall/<%=record._id%>/transferto'">Transfer Money</button>
+    </div>
 </div>
 
 <%- include("partials/footer") %>
